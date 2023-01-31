@@ -1,0 +1,340 @@
+.. Copyright 2018 Heiko Rothkranz
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+   http://www.apache.org/licenses/LICENSE-2.0
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+Software development manual
+###########################
+
+This chapter gives a rough introduction in how to make changes to the push
+button software.
+
+Setting up the development environment
+**************************************
+
+The pushbutton software is developed using the `ESP-IDF`_, the official
+software development kit (SDK) from ESP32 manufacturer Espressif. Just follow
+the "Setting Up ESP-IDF" instructions for Windows, Mac OS or Linux linked here:
+https://github.com/espressif/esp-idf
+
+.. note::
+   When you follow the setup guide for Windows, a "home directory" will be set
+   up for you in :file:`C:\\msys32\\home` . You should have a look into that
+   directory, to check if the name of your home directory containes any spaces.
+   
+   If it does, then the ESP-IDF setup might run into some problems as it seems
+   to fail to deal with space characters in file paths. You can work around it
+   like this:
+   
+   #. Create a new folder (make up a name without spaces) next to your
+      original one (the one with spaces); let's call it USERFOLDER here.
+   #. Edit :file:`C:\\msys32\\home\\USERNAME WITH SPACES\\.bash_profile` and
+      add the lines::
+      
+         export HOME=C:/msys32/home/USERFOLDER
+         cd  
+
+Setting up the project folder
+*****************************
+
+On Windows:
+===========
+
+#. Copy the :file:`eg-pushbutton-sources-x.x.x` folder to the
+   :file:`C:\\msys32\\home\\USERFOLDER\\esp` directory (x.x.x being the version
+   number)
+#. Start :file:`C:\\msys32\\mingw32.exe`.
+#. Change to the new directory by typing
+   :command:`cd C:\\msys32\\home\\USERFOLDER\\esp\\eg-pushbutton-sources-x.x.x`
+   (replace the 'x' with the version numbers from the folder name).
+
+On Linux:
+=========
+
+#. Copy the :file:`eg-pushbutton-sources-x.x.x` folder to your home directory
+   (x.x.x being the version number)
+#. Start the Terminal application
+#. Change to the new directory by typing
+   :command:`cd ~/eg-pushbutton-sources-x.x.x` (replace the 'x' with the
+   version numbers from the folder name).
+
+For both Windows and Linux:
+===========================
+
+#. Run :command:`make menuconfig` to bring up the configuration menu.
+#. In the menu, using the keyboard, navigate to "Serial flasher config" and
+   open it.
+#. Open the first item ("Default serial port") and change it to:
+
+      * On Windows: the COM port name you identified when installing the driver
+        (e.g. COM15)
+      * On Linux: the USB device name that shows up last when running
+        :command:`dmesg` after plugging in the development board (e.g.
+        /dev/ttyACM1)
+        
+#. Choose "Save", press "Enter" and then "Exit" until the menu exits (3x).
+#. Type :command:`make` to (re-)build the project. This may take a while.
+#. Then type :command:`make flash` to write the built programme to the dev
+   board.
+#. You can type :command:`make monitor` to see the debugging output the push
+   button sends out via USB.
+
+Understanding Bluetooth Low Energy (BLE)
+****************************************
+
+Bluetooth LE employs a client-server model: The server provides access to a set
+of variables, called "characteristics", via the so-called GATT protocol. The
+client connects to the server to read from and write to these variables. The
+characteristics can have additional variables associated to them, called
+"descriptors", to provide additional information on the characteristics, such
+as name or unit of the characteristic. A set of characteristics is grouped into
+a "service". Each service, characteristic or descriptor is identified by a
+Universally Unique Identifier (UUID), essentially a long, random string such as
+a984710c-9b1a-4cbd-a862-768099dc7797. A few services and characteristics, e.g.
+for battery level, are standardised and have officially assigned UUIDs.
+
+In our case, the student's button is the BLE server and exposes several
+variables/characteristics such as its 'enabled' status, toy operation time,
+maximum number of pushes before disabling, etc. In normal operation, the
+teacher's button assumes the role of the BLE client, connecting to the
+student's button's BLE server to reset its 'enabled' characteristic. Using the
+`EGPushButton Configurator`_ app, smartphones can also be used as a BLE client
+to connect to the student's button. The app will also access the button's other
+characteristics for configuration or to provide information to the user.
+When the teacher's button is brought into configuration mode, it will also
+provide a BLE server for the smartphone app to connect to. 
+
+When a BLE server is not connected to a client, it advertises itself by
+broadcasting it's identification, name and some configuration values. This is
+done via the GAP protocol. To save energy, our pushbuttons stop advertising
+once a client is connected.
+
+.. _section-project-layout:
+
+Project layout
+**************
+
+* :file:`eg-pushbutton-sources-x.x.x/` (main project directory, x.x.x being the
+  version number)
+
+  * :file:`build/` (contains files generated during the build process, incl.
+    the :file:`eg_pushbutton.bin` and :file:`partitions_singleapp.bin` files
+    for flashing)
+    
+    * :file:`bootloader/` (contains the bootloader.bin file for flashing)
+
+  * :file:`doc/` (contains this documentation; type :command:`make html` or
+    :command:`make pdf` in it to build the documentation)
+    
+    * :file:`build/` (output directory of the generated documentation, e.g. in
+      HTML or PDF)
+    * :file:`source/` (documentation sources in reStructuredText format)
+    
+  * :file:`hardware/` (contains the schematics files for the hardware, as KiCad
+    project and as PDF file)
+    
+  * :file:`main/` (contains the source code for the push button software)
+  
+    * :file:`eg_pushbutton.c` (main program file; boots up the pushbutton,
+      manages the different operation modes, initiates the BLE setup, listens
+      for button pushes, operates the toy as required, monitors battery level
+      and controls the LED)
+    * :file:`ble_config.h` (contains most of the definitions, e.g. the number
+      of BLE services, characteristic and descriptors, their UUIDS and other
+      BLE configuration)
+    * :file:`ble_config.c` (contains the 'layout' and attributes of all
+      services, characteristics and descriptors)
+    * :file:`ble_server.h` (defines the interface of :file:`ble_server.c` (see
+      below) for use by other parts of the software)
+    * :file:`ble_server.c` (contains code to operate the GAP and GATT servers,
+      i.e. to advertise the button when not connected, to handle connections
+      and to respond to read and write requests from clients; it also
+      initialises the buttons variables with the configuration read from flash
+      memory)
+    * :file:`ble_client.h` (defines the interface of :file:`ble_client.c` (see
+      below) for use by other parts of the software)
+    * :file:`ble_client.c` (contains code to search for student's buttons,
+      connect to them and write to them when requested to re-enable the
+      student's button)
+    * :file:`version.h` (defines the current software version; please update it
+      when making changes to other files; see :ref:`section-versioning`)
+
+.. _section-versioning:
+
+Software versioning
+*******************
+
+When making changes to the button software, with some buttons already in the
+field, you will likely end up with various versions of the button software in
+use out there. It is important to know which hardware button is equipped with
+which software version in order to
+
+* update all buttons consistently
+* make sense of bug reports
+* let the `EGPushButton Configurator`_ app know which button features it can
+  access
+* know which version of this manual to use for a particular button
+
+The software (=firmware) version of a button can be determined by connecting
+the `EGPushButton Configurator`_ app to it. It is changed by modifying the
+:file:`main/version.h` file.
+
+We use a software version number with three numbers, e.g. 0.3.1 as follows:
+
++----------+---------------+--------------------------------------------------+
+| Position | Name          | Meaning                                          |
++==========+===============+==================================================+
+| 1        | Major version | In our example: 0                                |
+|          |               |                                                  |
+|          |               | The major version number would be increased after|
+|          |               | a major rewrite of the software with significant |
+|          |               | changes to its inner workings and/or its         |
+|          |               | behavious towards the user. You should also      |
+|          |               | increase it when the software becomes            |
+|          |               | incompatible to older buttons.                   |
+|          |               |                                                  |
+|          |               | Because currently, the software is still         |
+|          |               | considered to be in development, we use the major|
+|          |               | version number 0.                                |
++----------+---------------+--------------------------------------------------+
+| 2        | Minor version | In our example: 3                                |
+|          |               |                                                  |
+|          |               | The minor version is increased every time a      |
+|          |               | change to the software changes the BLE interface,|
+|          |               | e.g. adding a new characteristic or changing any |
+|          |               | of the UUIDs.                                    |
+|          |               | In short, of the `EGPushButton Configurator`_ has|
+|          |               | to be updated in order to work with the changes, |
+|          |               | update the minor version number.                 |
++----------+---------------+--------------------------------------------------+
+| 3        | Revision      | In our example: 1                                |
+|          |               |                                                  |
+|          |               | For every change that does not change the BLE    |
+|          |               | interface, e.g. bugfixes, increase the revision  |
+|          |               | number.                                          |
++----------+---------------+--------------------------------------------------+
+
+How to change the button behaviour
+**********************************
+
+Much of the button behaviour, such as the minimum and maximum number of button
+pushes before the student's button disables itself, or the duration of toy
+operation per push, does not require any changes to the software. You can
+change those values using the `EGPushButton Configurator`_ app.
+
+The main button logic is contained in the :file:`main/eg_pushbutton.c` file.
+Please refer to the :ref:`section-project-layout` and the comments in the
+source code.
+
+Don't forget to update this documentation, too!
+
+How to add an additional BLE characteristic
+*******************************************
+
+If a new feature you're adding to the push button software requires the
+addition of a new BLE characteristic, you can roughly follow these steps:
+
+#. :file:`ble_config.h`
+
+   #. Increase the number of characteristics and descriptors for the respective
+      service you're editing, e.g. by modifying
+      ``GATTS_STUDENT_SERVICE_CHAR_NUM`` and ``GATTS_STUDENT_SERVICE_DESCR_NUM``
+      (most characteristics so far have three descriptors each: Characteristic
+      User Description, Client Characteristic Configuration and Characteristic
+      Presentation Format)
+   #. Define a new UUID for your characteristic (you can generate a new random
+      one at https://www.uuidgenerator.net)
+   #. Add the position of the new characteristic in the gatts_char array (as
+      you will define in :file:`ble_config.c`, see below) to the list of
+      definitions in the :file:`ble_config.h` file
+
+#. :file:`ble_config.c`
+
+   #. Add your new characteristic to the 'layout' in the comments at the
+      beginning of the file (this will make future edits easier)
+   #. Copy and adapt a section of the 'Characteristic/descriptor values' to
+      define the values of your characteristic and its descriptors
+   #. Copy and adapt a section of the value assignments below, to assign the
+      values defined in the previous step to the esp_attr_value_t types needed
+      in the next steps
+   #. Copy and adapt an element of the gatts_char array for your new
+      characteristic
+   #. Repeat the same for each new descriptor in the gatts_descr array
+
+#. Don't forget to update this documentation and the comments in the source
+   code!
+
+Updating the documentation
+**************************
+
+The documentation is written in `reStructuredText`_ using `Sphinx`_. For
+installation instructions, see
+http://www.sphinx-doc.org/en/master/usage/installation.html . To generate a
+PDF, you'll also need LaTeX.
+
+Once you have Sphinx and LaTeX installed, you can edit the .rst files in the
+:file:`doc/source` directory. To build the new HTML and PDF files, type
+:command:`make html` or :command:`make pdf` in the :file:`doc` directory. The
+generated documents will appear in the :file:`doc/build/html` and
+:file:`doc/build/pdf` directories, respectively.
+
+To update metadata such as the release version, see the
+:file:`doc/source/conf.py` file.
+
+To-Do List
+**********
+
+Here are some ideas that could be added/changed in the future:
+
+* Implement more precise battery measurement: The current method to determine
+  the battery level by measuring battery voltage is very imprecise, since
+  LiFePo4 batteries loose very little voltage while discharging. There are more
+  precise, but also more complex ways to determine the battery level for
+  LiFePo4 batteries.
+* Implement battery protection feature: To reduce the risk of deep discharge of
+  the battery, the push button could turn itself off, e.g. when detecting a
+  battery voltage below 2.8V. This might also prevent potential erroneous
+  behaviour of the push buttons at low voltage.
+* Store bluetooth connection details: Currently, when switched on, a teacher's
+  button will always scan for student's buttons to find the one it is supposed
+  to connect to. This could be changed so that the teacher's button will try to
+  connect using the last known connection parameters, and to start the scan
+  only when unsuccessful. This could significantly reduce the time to establish
+  the connection.
+* Implement power saving features: The teacher's button controller is able to
+  bring itself into a power saving mode, and to be woken up by the push button
+  when it's time to connect to the student's button again. At the time of
+  writing however, the ESP-IDF did not support these low power modes yet, which
+  is why it hasn't been implemented yet. It should result in significantly
+  longer battery life.
+* Optimise BLE parameters and connection handling: At the time of writing, the
+  BLE features of the ESP-IDF were still not documented in a very clear way by
+  Espressif. The connection parameters (e.g. connection interval and timeout)
+  could probably be optimised to increase speed of connection and operation
+  while decreasing power consumption. For the same reason, BLE connection
+  handling is still a bit unstable and there are some workarounds in the code
+  which are probably not so nice. This could be improved too.
+* Implement "find nearest" mode: A more flexible way of using the push buttons
+  might be if a teacher's button will just scan its surroundings and connect to
+  the student's button with the strongest bluetooth signal, as it's probably
+  nearest. This would allow to mix and pair student's and teacher's buttons
+  more efficiently. An idea could be to enable this behaviour when the button
+  number is set to 0.
+* Implement BLE notifications: The BLE protocol allows for the client to
+  subscribe to notifications on characteristics on the server. Then the server
+  will notify the client when the value of the characteristic changes. This
+  would be useful in combination with the `EGPushButton Configurator`_ app. The
+  app could subscribe to the button's 'enabled' status, for example, to always
+  display the correct status to the app user without the user needing to press
+  the 'refresh' button to poll for changes.
+
+.. _EGPushButton Configurator: https://play.google.com/store/apps/details?id=net.rothkranz.pushbutton
+.. _ESP-IDF: https://github.com/espressif/esp-idf
+.. _reStructuredText: http://www.sphinx-doc.org/en/master/rest.html
+.. _Sphinx: http://www.sphinx-doc.org

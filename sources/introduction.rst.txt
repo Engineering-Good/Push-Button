@@ -1,0 +1,41 @@
+.. Copyright 2018 Heiko Rothkranz
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+   http://www.apache.org/licenses/LICENSE-2.0
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+Introduction
+############
+
+The aim of the EG PushButton project is to encourage autistic students to ask
+their teacher for help when playing with electric toys.
+
+The EG PushButton project consists of two hardware devices:
+
+* Student's button: A remotely resettable toy activation button
+* Teacher's button: A button to remotely reset the student's button
+
+There's also a companion project providing an Android app to configure the push
+buttons: `EGPushButton Configurator`_
+
+The student's button is an easy-to-operate accessibility push button to
+activate an electric toy. When the student's button is pushed, a relay is
+closed, powering the connected toy.
+
+In order to encourage autistic students to ask their teacher for help, the
+student's button disables itself after a random number of pushes. When the
+student asks for help, the teacher can then re-enable the student's button by
+pushing the teacher's button.
+
+The two buttons communicate via Bluetooth Low Energy (BLE). An Android app is
+available to configure the push buttons.
+
+This project was developed for `Engineering Good`_.
+
+.. _EGPushButton Configurator: https://play.google.com/store/apps/details?id=net.rothkranz.pushbutton
+.. _Engineering Good: http://www.engineeringgood.org

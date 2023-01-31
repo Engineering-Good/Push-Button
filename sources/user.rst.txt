@@ -1,0 +1,182 @@
+.. Copyright 2018 Heiko Rothkranz
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+   http://www.apache.org/licenses/LICENSE-2.0
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+User's Manual
+#############
+
+.. _section-user-overview:
+
+Overview
+********
+
+.. image:: _static/pushbutton.jpg
+
+How to use the buttons
+**********************
+
+You should have received a student's button and a teacher's button which are
+already paired to each other and ready to use. If you want to use a combination
+of buttons which were not previously used with each other, see
+:ref:`section-pairing`.
+
+#. Connect the toy to the student's button.
+#. Turn both buttons on by setting the main switch to the 'on' position (I).
+#. The status LEDs will blink while the buttons are connecting to each other.
+   This often takes 15-30 seconds.
+#. After the status LEDs on both buttons stop blinking, they are ready to use.
+
+.. _section-status-led:
+
+Status LED
+**********
+
+The following table provides an overview of the various LED blinking patterns.
+
++-------------------------------+----------------------------------------+
+| LED pattern                   | Button status                          |
++===============================+========================================+
+| Blinking 2-3 times per second | Reference voltage measurement mode     |
+|                               | (see :ref:`section-reference-voltage`) |
++-------------------------------+----------------------------------------+
+| Blinking once per second      | Button is not connected                |
++-------------------------------+----------------------------------------+
+| Blinking every two seconds    | Battery empty                          |
++-------------------------------+----------------------------------------+
+| Steady light                  | Button connected and ready to use      |
++-------------------------------+----------------------------------------+
+
+Charging the buttons
+********************
+
+The push buttons contain a built-in USB charger. You can use any regular phone
+or tablet charger.
+
+To recharge the buttons, flip the main switch to the charging position (II).
+Plug in a USB charger. There's a small hole in the bottom of the push button,
+below the charger, through which you can see the charging light:
+
++--------------+------------------------------------------------------------+
+| Light colour | Charging status                                            |
++==============+============================================================+
+| Red          | Charging                                                   |
++--------------+------------------------------------------------------------+
+| Green        | Fully charged or main switch not in charging position (II) |
++--------------+------------------------------------------------------------+
+
+When the button is fully charged, unplug the USB charger and set the main
+switch back to 'off' (O). If the main switch is left in the charging position
+(II) for a very long time, the batteries will self-discharge and potentially
+damage.
+
+Replacing the batteries
+***********************
+
+It is normally not necessary to replace the included rechargeable batteries.
+
+.. danger::
+   Only use rechargeable Lithium Iron Phophate (LiFePo4) batteries. Do not
+   attempt to use regular batteries. When exchanging the batteries, be sure to
+   insert them as marked in the battery compartment. Inserting batteries of the
+   wrong type or in the wrong orientation may result in damage to the buttons
+   and/or a fire hazard! If unsure, do not hesitate to ask for help!
+
+The push buttons use LiFePo4 batteries with a nominal voltage of 3.2V. The
+correct orientation of the batteries is **hand-labeled** inside the battery
+compartment and may deviate from the orientation marked in the plastic or the
+orientation suggested by the battery holder. Both batteries must have the same
+orientation. They are to be connected in parallel, not in series. 
+
+.. _section-configuration:
+
+Configuring the buttons
+***********************
+
+The `EGPushButton Configurator`_ app can connect to any student's button or
+teacher's button (in configuration mode) to inspect and change its settings.
+
+To be able to connect to a student's button, it must not be connected to any
+other device already. Specifically, switch off its associated teacher's button
+while configuring the student's button.
+
+To put a teacher's button into configuration mode, hold down its push button
+while switching the button on.
+
+A student's button provides the following options:
+
+* :guilabel:`Button number` between 1 and 99 (used for pairing, see :ref:`section-pairing`)
+* :guilabel:`Button mode` ('Student', can be set to 'Teacher')
+* :guilabel:`Enabled` status (0 = disabled, 1 = enabled)
+* :guilabel:`Min. pushes` and :guilabel:`Max. pushes` (1-255) between which the
+  button is randomly disabled
+* Toy :guilabel:`Operation time` per push in seconds (1-255)
+* :guilabel:`Reference voltage` in millivolts (to be set during manufacturing, see
+  :ref:`section-reference-voltage`)
+  
+It also displays the following information:
+
+* Current number of button pushes and current random limit after which the
+  button will be disabled
+* Current :guilabel:`Toy status` (off or on)
+* :guilabel:`Firmware version`
+
+The teacher's button only offers the following options:
+
+* :guilabel:`Button number` between 1 and 99
+* :guilabel:`Button mode` ('Teacher', can be set to 'Student')
+* :guilabel:`Reference voltage`
+* :guilabel:`Firmware version` for information
+
+Numeric settings can be saved to the button by pressing the |app-save-button|
+icon next to it. To refresh a value or status, press the |app-refresh-button|
+icon next to it.
+
+For the button number or mode settings to take effect, you need to restart the
+button.
+
+.. _section-pairing:
+
+Pairing student and teacher buttons
+***********************************
+
+Each button (student and teacher) has a button number. A teacher button will
+try to connect to a student button with the same number as its own. To pair a
+teacher button to a different student button, you will have to change the
+button number of one or both of them. It does not matter which number between
+1 and 99 you choose, but it should be different from other button pairs you may
+be using.
+
+To change a button's number you need to use the `EGPushButton Configurator`_
+app.
+
+To change the number of a student's button
+==========================================
+
+#. Make sure any teacher's buttons in the vicinity are off, otherwise they
+   interfere with the app connection.
+#. Turn the student's button on.
+#. Find the student's button in the app and connect to it.
+#. Enter the new button number into the app and press the |app-save-button| icon next to it.
+#. Turn the student's button off and on again for the change to take effect.
+
+To change the number of a teacher's button
+==========================================
+
+#. Hold down the teacher's push button while turning it on.
+#. Find the teacher's button in the app and connect to it.
+#. Enter the new button number into the app and press the |app-save-button| icon next to it.
+#. Turn the teacher's button off and on again for the change to take effect.
+
+.. |app-save-button| image:: _static/app-save-button.png
+   :scale: 50%
+.. |app-refresh-button| image:: _static/app-refresh-button.png
+   :scale: 50%
+
+.. _EGPushButton Configurator: https://play.google.com/store/apps/details?id=net.rothkranz.pushbutton
