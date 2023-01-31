@@ -1,0 +1,593 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Software development manual &mdash; EGPushButton 0.3.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="EGPushButton 0.3.3 documentation" href="index.html"/>
+        <link rel="prev" title="Hardware building instructions" href="hardware.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> EGPushButton
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user.html">User’s Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hardware.html">Hardware building instructions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Software development manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-the-development-environment">Setting up the development environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-the-project-folder">Setting up the project folder</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#on-windows">On Windows:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#on-linux">On Linux:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#for-both-windows-and-linux">For both Windows and Linux:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#understanding-bluetooth-low-energy-ble">Understanding Bluetooth Low Energy (BLE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#project-layout">Project layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#software-versioning">Software versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-change-the-button-behaviour">How to change the button behaviour</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-add-an-additional-ble-characteristic">How to add an additional BLE characteristic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#updating-the-documentation">Updating the documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#to-do-list">To-Do List</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">EGPushButton</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Software development manual</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/software.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="software-development-manual">
+<h1>Software development manual<a class="headerlink" href="#software-development-manual" title="Permalink to this headline">¶</a></h1>
+<p>This chapter gives a rough introduction in how to make changes to the push
+button software.</p>
+<div class="section" id="setting-up-the-development-environment">
+<h2>Setting up the development environment<a class="headerlink" href="#setting-up-the-development-environment" title="Permalink to this headline">¶</a></h2>
+<p>The pushbutton software is developed using the <a class="reference external" href="https://github.com/espressif/esp-idf">ESP-IDF</a>, the official
+software development kit (SDK) from ESP32 manufacturer Espressif. Just follow
+the “Setting Up ESP-IDF” instructions for Windows, Mac OS or Linux linked here:
+<a class="reference external" href="https://github.com/espressif/esp-idf">https://github.com/espressif/esp-idf</a></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>When you follow the setup guide for Windows, a “home directory” will be set
+up for you in <code class="file docutils literal"><span class="pre">C:\msys32\home</span></code> . You should have a look into that
+directory, to check if the name of your home directory containes any spaces.</p>
+<p>If it does, then the ESP-IDF setup might run into some problems as it seems
+to fail to deal with space characters in file paths. You can work around it
+like this:</p>
+<ol class="last arabic">
+<li><p class="first">Create a new folder (make up a name without spaces) next to your
+original one (the one with spaces); let’s call it USERFOLDER here.</p>
+</li>
+<li><p class="first">Edit <code class="file docutils literal"><span class="pre">C:\msys32\home\USERNAME</span> <span class="pre">WITH</span> <span class="pre">SPACES\.bash_profile</span></code> and
+add the lines:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">HOME</span><span class="o">=</span><span class="n">C</span><span class="p">:</span><span class="o">/</span><span class="n">msys32</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">USERFOLDER</span>
+<span class="n">cd</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="setting-up-the-project-folder">
+<h2>Setting up the project folder<a class="headerlink" href="#setting-up-the-project-folder" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="on-windows">
+<h3>On Windows:<a class="headerlink" href="#on-windows" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Copy the <code class="file docutils literal"><span class="pre">eg-pushbutton-sources-x.x.x</span></code> folder to the
+<code class="file docutils literal"><span class="pre">C:\msys32\home\USERFOLDER\esp</span></code> directory (x.x.x being the version
+number)</li>
+<li>Start <code class="file docutils literal"><span class="pre">C:\msys32\mingw32.exe</span></code>.</li>
+<li>Change to the new directory by typing
+<strong class="command">cd C:\msys32\home\USERFOLDER\esp\eg-pushbutton-sources-x.x.x</strong>
+(replace the ‘x’ with the version numbers from the folder name).</li>
+</ol>
+</div>
+<div class="section" id="on-linux">
+<h3>On Linux:<a class="headerlink" href="#on-linux" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Copy the <code class="file docutils literal"><span class="pre">eg-pushbutton-sources-x.x.x</span></code> folder to your home directory
+(x.x.x being the version number)</li>
+<li>Start the Terminal application</li>
+<li>Change to the new directory by typing
+<strong class="command">cd ~/eg-pushbutton-sources-x.x.x</strong> (replace the ‘x’ with the
+version numbers from the folder name).</li>
+</ol>
+</div>
+<div class="section" id="for-both-windows-and-linux">
+<h3>For both Windows and Linux:<a class="headerlink" href="#for-both-windows-and-linux" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Run <strong class="command">make menuconfig</strong> to bring up the configuration menu.</p>
+</li>
+<li><p class="first">In the menu, using the keyboard, navigate to “Serial flasher config” and
+open it.</p>
+</li>
+<li><p class="first">Open the first item (“Default serial port”) and change it to:</p>
+<blockquote>
+<div><ul class="simple">
+<li>On Windows: the COM port name you identified when installing the driver
+(e.g. COM15)</li>
+<li>On Linux: the USB device name that shows up last when running
+<strong class="command">dmesg</strong> after plugging in the development board (e.g.
+/dev/ttyACM1)</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Choose “Save”, press “Enter” and then “Exit” until the menu exits (3x).</p>
+</li>
+<li><p class="first">Type <strong class="command">make</strong> to (re-)build the project. This may take a while.</p>
+</li>
+<li><p class="first">Then type <strong class="command">make flash</strong> to write the built programme to the dev
+board.</p>
+</li>
+<li><p class="first">You can type <strong class="command">make monitor</strong> to see the debugging output the push
+button sends out via USB.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="understanding-bluetooth-low-energy-ble">
+<h2>Understanding Bluetooth Low Energy (BLE)<a class="headerlink" href="#understanding-bluetooth-low-energy-ble" title="Permalink to this headline">¶</a></h2>
+<p>Bluetooth LE employs a client-server model: The server provides access to a set
+of variables, called “characteristics”, via the so-called GATT protocol. The
+client connects to the server to read from and write to these variables. The
+characteristics can have additional variables associated to them, called
+“descriptors”, to provide additional information on the characteristics, such
+as name or unit of the characteristic. A set of characteristics is grouped into
+a “service”. Each service, characteristic or descriptor is identified by a
+Universally Unique Identifier (UUID), essentially a long, random string such as
+a984710c-9b1a-4cbd-a862-768099dc7797. A few services and characteristics, e.g.
+for battery level, are standardised and have officially assigned UUIDs.</p>
+<p>In our case, the student’s button is the BLE server and exposes several
+variables/characteristics such as its ‘enabled’ status, toy operation time,
+maximum number of pushes before disabling, etc. In normal operation, the
+teacher’s button assumes the role of the BLE client, connecting to the
+student’s button’s BLE server to reset its ‘enabled’ characteristic. Using the
+<a class="reference external" href="https://play.google.com/store/apps/details?id=net.rothkranz.pushbutton">EGPushButton Configurator</a> app, smartphones can also be used as a BLE client
+to connect to the student’s button. The app will also access the button’s other
+characteristics for configuration or to provide information to the user.
+When the teacher’s button is brought into configuration mode, it will also
+provide a BLE server for the smartphone app to connect to.</p>
+<p>When a BLE server is not connected to a client, it advertises itself by
+broadcasting it’s identification, name and some configuration values. This is
+done via the GAP protocol. To save energy, our pushbuttons stop advertising
+once a client is connected.</p>
+</div>
+<div class="section" id="project-layout">
+<span id="section-project-layout"></span><h2>Project layout<a class="headerlink" href="#project-layout" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="file docutils literal"><span class="pre">eg-pushbutton-sources-x.x.x/</span></code> (main project directory, x.x.x being the
+version number)<ul>
+<li><code class="file docutils literal"><span class="pre">build/</span></code> (contains files generated during the build process, incl.
+the <code class="file docutils literal"><span class="pre">eg_pushbutton.bin</span></code> and <code class="file docutils literal"><span class="pre">partitions_singleapp.bin</span></code> files
+for flashing)<ul>
+<li><code class="file docutils literal"><span class="pre">bootloader/</span></code> (contains the bootloader.bin file for flashing)</li>
+</ul>
+</li>
+<li><code class="file docutils literal"><span class="pre">doc/</span></code> (contains this documentation; type <strong class="command">make html</strong> or
+<strong class="command">make pdf</strong> in it to build the documentation)<ul>
+<li><code class="file docutils literal"><span class="pre">build/</span></code> (output directory of the generated documentation, e.g. in
+HTML or PDF)</li>
+<li><code class="file docutils literal"><span class="pre">source/</span></code> (documentation sources in reStructuredText format)</li>
+</ul>
+</li>
+<li><code class="file docutils literal"><span class="pre">hardware/</span></code> (contains the schematics files for the hardware, as KiCad
+project and as PDF file)</li>
+<li><code class="file docutils literal"><span class="pre">main/</span></code> (contains the source code for the push button software)<ul>
+<li><code class="file docutils literal"><span class="pre">eg_pushbutton.c</span></code> (main program file; boots up the pushbutton,
+manages the different operation modes, initiates the BLE setup, listens
+for button pushes, operates the toy as required, monitors battery level
+and controls the LED)</li>
+<li><code class="file docutils literal"><span class="pre">ble_config.h</span></code> (contains most of the definitions, e.g. the number
+of BLE services, characteristic and descriptors, their UUIDS and other
+BLE configuration)</li>
+<li><code class="file docutils literal"><span class="pre">ble_config.c</span></code> (contains the ‘layout’ and attributes of all
+services, characteristics and descriptors)</li>
+<li><code class="file docutils literal"><span class="pre">ble_server.h</span></code> (defines the interface of <code class="file docutils literal"><span class="pre">ble_server.c</span></code> (see
+below) for use by other parts of the software)</li>
+<li><code class="file docutils literal"><span class="pre">ble_server.c</span></code> (contains code to operate the GAP and GATT servers,
+i.e. to advertise the button when not connected, to handle connections
+and to respond to read and write requests from clients; it also
+initialises the buttons variables with the configuration read from flash
+memory)</li>
+<li><code class="file docutils literal"><span class="pre">ble_client.h</span></code> (defines the interface of <code class="file docutils literal"><span class="pre">ble_client.c</span></code> (see
+below) for use by other parts of the software)</li>
+<li><code class="file docutils literal"><span class="pre">ble_client.c</span></code> (contains code to search for student’s buttons,
+connect to them and write to them when requested to re-enable the
+student’s button)</li>
+<li><code class="file docutils literal"><span class="pre">version.h</span></code> (defines the current software version; please update it
+when making changes to other files; see <a class="reference internal" href="#section-versioning"><span class="std std-ref">Software versioning</span></a>)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="software-versioning">
+<span id="section-versioning"></span><h2>Software versioning<a class="headerlink" href="#software-versioning" title="Permalink to this headline">¶</a></h2>
+<p>When making changes to the button software, with some buttons already in the
+field, you will likely end up with various versions of the button software in
+use out there. It is important to know which hardware button is equipped with
+which software version in order to</p>
+<ul class="simple">
+<li>update all buttons consistently</li>
+<li>make sense of bug reports</li>
+<li>let the <a class="reference external" href="https://play.google.com/store/apps/details?id=net.rothkranz.pushbutton">EGPushButton Configurator</a> app know which button features it can
+access</li>
+<li>know which version of this manual to use for a particular button</li>
+</ul>
+<p>The software (=firmware) version of a button can be determined by connecting
+the <a class="reference external" href="https://play.google.com/store/apps/details?id=net.rothkranz.pushbutton">EGPushButton Configurator</a> app to it. It is changed by modifying the
+<code class="file docutils literal"><span class="pre">main/version.h</span></code> file.</p>
+<p>We use a software version number with three numbers, e.g. 0.3.1 as follows:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="20%" />
+<col width="67%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Position</th>
+<th class="head">Name</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1</td>
+<td>Major version</td>
+<td><p class="first">In our example: 0</p>
+<p>The major version number would be increased after
+a major rewrite of the software with significant
+changes to its inner workings and/or its
+behavious towards the user. You should also
+increase it when the software becomes
+incompatible to older buttons.</p>
+<p class="last">Because currently, the software is still
+considered to be in development, we use the major
+version number 0.</p>
+</td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>Minor version</td>
+<td><p class="first">In our example: 3</p>
+<p class="last">The minor version is increased every time a
+change to the software changes the BLE interface,
+e.g. adding a new characteristic or changing any
+of the UUIDs.
+In short, of the <a class="reference external" href="https://play.google.com/store/apps/details?id=net.rothkranz.pushbutton">EGPushButton Configurator</a> has
+to be updated in order to work with the changes,
+update the minor version number.</p>
+</td>
+</tr>
+<tr class="row-even"><td>3</td>
+<td>Revision</td>
+<td><p class="first">In our example: 1</p>
+<p class="last">For every change that does not change the BLE
+interface, e.g. bugfixes, increase the revision
+number.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="how-to-change-the-button-behaviour">
+<h2>How to change the button behaviour<a class="headerlink" href="#how-to-change-the-button-behaviour" title="Permalink to this headline">¶</a></h2>
+<p>Much of the button behaviour, such as the minimum and maximum number of button
+pushes before the student’s button disables itself, or the duration of toy
+operation per push, does not require any changes to the software. You can
+change those values using the <a class="reference external" href="https://play.google.com/store/apps/details?id=net.rothkranz.pushbutton">EGPushButton Configurator</a> app.</p>
+<p>The main button logic is contained in the <code class="file docutils literal"><span class="pre">main/eg_pushbutton.c</span></code> file.
+Please refer to the <a class="reference internal" href="#section-project-layout"><span class="std std-ref">Project layout</span></a> and the comments in the
+source code.</p>
+<p>Don’t forget to update this documentation, too!</p>
+</div>
+<div class="section" id="how-to-add-an-additional-ble-characteristic">
+<h2>How to add an additional BLE characteristic<a class="headerlink" href="#how-to-add-an-additional-ble-characteristic" title="Permalink to this headline">¶</a></h2>
+<p>If a new feature you’re adding to the push button software requires the
+addition of a new BLE characteristic, you can roughly follow these steps:</p>
+<ol class="arabic simple">
+<li><code class="file docutils literal"><span class="pre">ble_config.h</span></code><ol class="arabic">
+<li>Increase the number of characteristics and descriptors for the respective
+service you’re editing, e.g. by modifying
+<code class="docutils literal"><span class="pre">GATTS_STUDENT_SERVICE_CHAR_NUM</span></code> and <code class="docutils literal"><span class="pre">GATTS_STUDENT_SERVICE_DESCR_NUM</span></code>
+(most characteristics so far have three descriptors each: Characteristic
+User Description, Client Characteristic Configuration and Characteristic
+Presentation Format)</li>
+<li>Define a new UUID for your characteristic (you can generate a new random
+one at <a class="reference external" href="https://www.uuidgenerator.net">https://www.uuidgenerator.net</a>)</li>
+<li>Add the position of the new characteristic in the gatts_char array (as
+you will define in <code class="file docutils literal"><span class="pre">ble_config.c</span></code>, see below) to the list of
+definitions in the <code class="file docutils literal"><span class="pre">ble_config.h</span></code> file</li>
+</ol>
+</li>
+<li><code class="file docutils literal"><span class="pre">ble_config.c</span></code><ol class="arabic">
+<li>Add your new characteristic to the ‘layout’ in the comments at the
+beginning of the file (this will make future edits easier)</li>
+<li>Copy and adapt a section of the ‘Characteristic/descriptor values’ to
+define the values of your characteristic and its descriptors</li>
+<li>Copy and adapt a section of the value assignments below, to assign the
+values defined in the previous step to the esp_attr_value_t types needed
+in the next steps</li>
+<li>Copy and adapt an element of the gatts_char array for your new
+characteristic</li>
+<li>Repeat the same for each new descriptor in the gatts_descr array</li>
+</ol>
+</li>
+<li>Don’t forget to update this documentation and the comments in the source
+code!</li>
+</ol>
+</div>
+<div class="section" id="updating-the-documentation">
+<h2>Updating the documentation<a class="headerlink" href="#updating-the-documentation" title="Permalink to this headline">¶</a></h2>
+<p>The documentation is written in <a class="reference external" href="http://www.sphinx-doc.org/en/master/rest.html">reStructuredText</a> using <a class="reference external" href="http://www.sphinx-doc.org">Sphinx</a>. For
+installation instructions, see
+<a class="reference external" href="http://www.sphinx-doc.org/en/master/usage/installation.html">http://www.sphinx-doc.org/en/master/usage/installation.html</a> . To generate a
+PDF, you’ll also need LaTeX.</p>
+<p>Once you have Sphinx and LaTeX installed, you can edit the .rst files in the
+<code class="file docutils literal"><span class="pre">doc/source</span></code> directory. To build the new HTML and PDF files, type
+<strong class="command">make html</strong> or <strong class="command">make pdf</strong> in the <code class="file docutils literal"><span class="pre">doc</span></code> directory. The
+generated documents will appear in the <code class="file docutils literal"><span class="pre">doc/build/html</span></code> and
+<code class="file docutils literal"><span class="pre">doc/build/pdf</span></code> directories, respectively.</p>
+<p>To update metadata such as the release version, see the
+<code class="file docutils literal"><span class="pre">doc/source/conf.py</span></code> file.</p>
+</div>
+<div class="section" id="to-do-list">
+<h2>To-Do List<a class="headerlink" href="#to-do-list" title="Permalink to this headline">¶</a></h2>
+<p>Here are some ideas that could be added/changed in the future:</p>
+<ul class="simple">
+<li>Implement more precise battery measurement: The current method to determine
+the battery level by measuring battery voltage is very imprecise, since
+LiFePo4 batteries loose very little voltage while discharging. There are more
+precise, but also more complex ways to determine the battery level for
+LiFePo4 batteries.</li>
+<li>Implement battery protection feature: To reduce the risk of deep discharge of
+the battery, the push button could turn itself off, e.g. when detecting a
+battery voltage below 2.8V. This might also prevent potential erroneous
+behaviour of the push buttons at low voltage.</li>
+<li>Store bluetooth connection details: Currently, when switched on, a teacher’s
+button will always scan for student’s buttons to find the one it is supposed
+to connect to. This could be changed so that the teacher’s button will try to
+connect using the last known connection parameters, and to start the scan
+only when unsuccessful. This could significantly reduce the time to establish
+the connection.</li>
+<li>Implement power saving features: The teacher’s button controller is able to
+bring itself into a power saving mode, and to be woken up by the push button
+when it’s time to connect to the student’s button again. At the time of
+writing however, the ESP-IDF did not support these low power modes yet, which
+is why it hasn’t been implemented yet. It should result in significantly
+longer battery life.</li>
+<li>Optimise BLE parameters and connection handling: At the time of writing, the
+BLE features of the ESP-IDF were still not documented in a very clear way by
+Espressif. The connection parameters (e.g. connection interval and timeout)
+could probably be optimised to increase speed of connection and operation
+while decreasing power consumption. For the same reason, BLE connection
+handling is still a bit unstable and there are some workarounds in the code
+which are probably not so nice. This could be improved too.</li>
+<li>Implement “find nearest” mode: A more flexible way of using the push buttons
+might be if a teacher’s button will just scan its surroundings and connect to
+the student’s button with the strongest bluetooth signal, as it’s probably
+nearest. This would allow to mix and pair student’s and teacher’s buttons
+more efficiently. An idea could be to enable this behaviour when the button
+number is set to 0.</li>
+<li>Implement BLE notifications: The BLE protocol allows for the client to
+subscribe to notifications on characteristics on the server. Then the server
+will notify the client when the value of the characteristic changes. This
+would be useful in combination with the <a class="reference external" href="https://play.google.com/store/apps/details?id=net.rothkranz.pushbutton">EGPushButton Configurator</a> app. The
+app could subscribe to the button’s ‘enabled’ status, for example, to always
+display the correct status to the app user without the user needing to press
+the ‘refresh’ button to poll for changes.</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="hardware.html" class="btn btn-neutral" title="Hardware building instructions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Heiko Rothkranz.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.3.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

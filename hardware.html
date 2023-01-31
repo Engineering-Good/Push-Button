@@ -1,0 +1,463 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Hardware building instructions &mdash; EGPushButton 0.3.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="EGPushButton 0.3.3 documentation" href="index.html"/>
+        <link rel="next" title="Software development manual" href="software.html"/>
+        <link rel="prev" title="User’s Manual" href="user.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> EGPushButton
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user.html">User’s Manual</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Hardware building instructions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#required-parts">Required parts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#teacher-s-button">Teacher’s button</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#student-s-button">Student’s button</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#schematics">Schematics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#selecting-batteries-cases-and-chargers">Selecting batteries, cases and chargers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#matching-led-and-resistor">Matching LED and resistor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#flashing-the-software">Flashing the software</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#on-windows">On Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#on-linux">On Linux</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#calibrating-the-battery-measurement">Calibrating the battery measurement</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="software.html">Software development manual</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">EGPushButton</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Hardware building instructions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/hardware.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="hardware-building-instructions">
+<h1>Hardware building instructions<a class="headerlink" href="#hardware-building-instructions" title="Permalink to this headline">¶</a></h1>
+<p>This chapter explains how the push button hardware works and how to build new
+push buttons.</p>
+<div class="section" id="required-parts">
+<h2>Required parts<a class="headerlink" href="#required-parts" title="Permalink to this headline">¶</a></h2>
+<p>The following parts are needed to build the buttons. The student’s button is
+made the same way as the teacher’s button, but also has a relay and an audio
+socket in addition, to allow to connect and control a toy.</p>
+<div class="section" id="teacher-s-button">
+<h3>Teacher’s button<a class="headerlink" href="#teacher-s-button" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>1 housing</li>
+<li>1 push button which is normally open and closes electrical contact when
+pushed</li>
+<li>Battery case(s) for the batteries (see <a class="reference internal" href="#section-batteries-cases-chargers"><span class="std std-ref">Selecting batteries, cases and chargers</span></a>
+below)</li>
+<li>At least one LiFePo4 battery (see <a class="reference internal" href="#section-batteries-cases-chargers"><span class="std std-ref">Selecting batteries, cases and chargers</span></a>)</li>
+<li>1 switch with three positions</li>
+<li>Micro USB charger board for LiFePo4 batteries (e.g. ‘TP5000’, see
+<a class="reference internal" href="#section-batteries-cases-chargers"><span class="std std-ref">Selecting batteries, cases and chargers</span></a> below)</li>
+<li>1 ESP32 development board: Any development board with USB port should work</li>
+<li>1 LED (see <a class="reference internal" href="#section-led-resistor"><span class="std std-ref">Matching LED and resistor</span></a> below)</li>
+<li>1 resistor (value depending on your LED, see <a class="reference internal" href="#section-led-resistor"><span class="std std-ref">Matching LED and resistor</span></a>
+below)</li>
+<li>Insulated wire, preferably in different colours</li>
+<li>Some small nuts and bolts and/or hot glue to fixate the parts inside the
+housing (note that the charger might become hot when charging and melt the
+hot glue)</li>
+</ul>
+</div>
+<div class="section" id="student-s-button">
+<h3>Student’s button<a class="headerlink" href="#student-s-button" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>All the parts as for the teacher’s button</li>
+<li>1 3V/3.3V electromechanical relay (e.g. ‘Songle 3V’)</li>
+<li>3.5mm mono audio/headphone socket</li>
+</ul>
+<p>You may also be able to find housing, push button and battery case in one item,
+e.g. in those battery powered LED night lights. Have a look at the image in the
+user manual’s <a class="reference internal" href="user.html#section-user-overview"><span class="std std-ref">Overview</span></a> section to see an example.</p>
+</div>
+</div>
+<div class="section" id="schematics">
+<h2>Schematics<a class="headerlink" href="#schematics" title="Permalink to this headline">¶</a></h2>
+<img alt="_images/schematics.png" src="_images/schematics.png" />
+<p>The schematics are identical for the student’s and the teacher’s version,
+except for the addition of a relay and an audio socket to the student’s button.
+The schematics can also be found as KiCad project and PDF file in
+the <code class="file docutils literal"><span class="pre">eg-pushbutton-sources/hardware</span></code> directory.</p>
+</div>
+<div class="section" id="selecting-batteries-cases-and-chargers">
+<span id="section-batteries-cases-chargers"></span><h2>Selecting batteries, cases and chargers<a class="headerlink" href="#selecting-batteries-cases-and-chargers" title="Permalink to this headline">¶</a></h2>
+<p>The ESP32 and the relay need an operating voltage between 2.2V and 3.6V. This
+is not achievable using regular alkaline or rechargeable batteries without
+additional circuitry. Therefore, LiFePo4 rechargeable batteries are
+recommended, because they can power the ESP32 and the relay directly.</p>
+<p>The original design uses two AA size 600mAh LiFePo4 batteries in parallel, for
+a combined capacity of 1200mAh. If your housing size permits, you could also
+use a single battery of similar capacity, or even a larger one for longer
+operating time.</p>
+<p>If you use more than one battery, it is important to connect them in parallel,
+not in series! Most battery holders for two or more batteries are designed for
+series connection though. You may have to modify the battery holder for a
+parallel setup.</p>
+<p>Generally, the slower you charge a LiFePo4 battery, the more cycles it will
+last. Usually, the battery manufacturer should state the maximum charging
+current, but this does not always seem to be the case. In our experience,
+charging the 1200mAh battery set with a 1000mA charging current resulted in a
+full charge after about 2.5h.</p>
+</div>
+<div class="section" id="matching-led-and-resistor">
+<span id="section-led-resistor"></span><h2>Matching LED and resistor<a class="headerlink" href="#matching-led-and-resistor" title="Permalink to this headline">¶</a></h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">If you don’t have the voltage drop and design current for your LED, using a
+200 Ohms resistor should be a safe bet for most LED and should not endanger
+your ES32. Don’t blame me if it breaks your LED though.</p>
+</div>
+<p>LEDs only have voltage drop, but no internal resistance. Therefore, without a
+resistor, there would be too much current which will potentially damage the LED
+and the ESP32.</p>
+<p>The ESP32 can provide a maximum of 40mA current on any output pin, so you
+should choose a LED which needs less than that. Most standard LEDs need about
+20mA for full brightness.</p>
+<p>If you know the design current and voltage drop of your LED, you can calculate
+the required resistor value in Ohms using:</p>
+<p>R = (3.3V-U_drop)/I_max</p>
+<p>Resistors don’t come with arbitrary values, so you should choose the next
+larger resistor you can find. That will dim the LED slightly, but you’ll be on
+the safe side in terms of current.</p>
+</div>
+<div class="section" id="flashing-the-software">
+<h2>Flashing the software<a class="headerlink" href="#flashing-the-software" title="Permalink to this headline">¶</a></h2>
+<p>Both the teacher’s button and the student’s button run the same software. After
+flashing a button for the first time, it will start up as a student’s button.
+The button mode can be changed to be a teacher’s button using the
+<a class="reference external" href="https://play.google.com/store/apps/details?id=net.rothkranz.pushbutton">EGPushButton Configurator</a> app (see <a class="reference internal" href="user.html#section-configuration"><span class="std std-ref">Configuring the buttons</span></a>).</p>
+<ol class="arabic simple">
+<li>Before flashing, turn off the pushbutton by switching the main switch to 0
+(off)</li>
+<li>Get the latest pushbutton software from EG. It’s in a folder named
+<code class="file docutils literal"><span class="pre">eg-pushbutton-release-x.x.x</span></code> (x.x.x being the version number). It
+contains three files:<ul>
+<li><code class="file docutils literal"><span class="pre">bootloader.bin</span></code></li>
+<li><code class="file docutils literal"><span class="pre">eg_pushbutton.bin</span></code></li>
+<li><code class="file docutils literal"><span class="pre">partitions_singleapp.bin</span></code></li>
+</ul>
+</li>
+<li>Connect the ESP32 board to your computer as described in
+<a class="reference external" href="http://esp-idf.readthedocs.io/en/latest/get-started/establish-serial-connection.html">http://esp-idf.readthedocs.io/en/latest/get-started/establish-serial-connection.html</a></li>
+</ol>
+<div class="section" id="on-windows">
+<h3>On Windows<a class="headerlink" href="#on-windows" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Download and unpack the <a class="reference external" href="https://www.espressif.com/en/support/download/other-tools">Flash Download Tools</a> from the Espressif website</p>
+</li>
+<li><p class="first">Start the .exe file within</p>
+</li>
+<li><p class="first">Click <span class="guilabel">ESP32 DownloadTool</span></p>
+</li>
+<li><p class="first">In the <span class="guilabel">SPIDownload</span> tab, make the following settings as shown in
+the screenshot below:</p>
+<ul class="simple">
+<li>Add the three .bin files from the software release as follows:<ul>
+<li><code class="file docutils literal"><span class="pre">bootloader.bin</span></code> &#64; 0x1000</li>
+<li><code class="file docutils literal"><span class="pre">eg_pushbutton.bin</span></code> &#64; 0x10000</li>
+<li><code class="file docutils literal"><span class="pre">partitions_singleapp.bin</span></code> &#64; 0x8000</li>
+</ul>
+</li>
+<li>Set COM port to the USB device as determined in the Windows Device Manager
+when setting up the connection</li>
+<li>Set BAUD rate to “115200”</li>
+<li>Ensure that <span class="guilabel">SPI MODE</span> is set to “DIO”</li>
+<li>Ensure that <span class="guilabel">SPI SPEED</span> is set to “40M”</li>
+<li>Ensure that <span class="guilabel">FLASH SIZE</span> is set to “32MBit”</li>
+<li>Ensure that <span class="guilabel">SpiAutoSet</span> is unchecked</li>
+</ul>
+<img alt="_images/espdownloadtool.png" src="_images/espdownloadtool.png" />
+</li>
+<li><p class="first">Click <span class="guilabel">START</span></p>
+</li>
+<li><p class="first">Wait for the green status box to read “FINISH”</p>
+</li>
+<li><p class="first">Reset the ESP32 by pushing the “EN” button on the development board or by
+unplugging the USB cable</p>
+</li>
+</ol>
+</div>
+<div class="section" id="on-linux">
+<h3>On Linux<a class="headerlink" href="#on-linux" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Install <a class="reference external" href="https://github.com/espressif/esptool">esptool.py</a></p>
+</li>
+<li><p class="first">From your project directory, run:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">esptool</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">chip</span> <span class="n">esp32</span> <span class="o">--</span><span class="n">port</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">ttyUSB0</span> <span class="o">--</span><span class="n">baud</span> <span class="mi">115200</span> \
+<span class="o">--</span><span class="n">before</span> <span class="n">default_reset</span> <span class="o">--</span><span class="n">after</span> <span class="n">hard_reset</span> \
+<span class="n">write_flash</span> <span class="o">-</span><span class="n">z</span> <span class="o">--</span><span class="n">flash_mode</span> <span class="n">dio</span> <span class="o">--</span><span class="n">flash_freq</span> <span class="mi">40</span><span class="n">m</span> <span class="o">--</span><span class="n">flash_size</span> <span class="n">detect</span> \
+<span class="mh">0x1000</span> <span class="n">build</span><span class="o">/</span><span class="n">bootloader</span><span class="o">/</span><span class="n">bootloader</span><span class="o">.</span><span class="n">bin</span> \
+<span class="mh">0x10000</span> <span class="n">build</span><span class="o">/</span><span class="n">eg_pushbutton</span><span class="o">.</span><span class="n">bin</span> \
+<span class="mh">0x8000</span> <span class="n">build</span><span class="o">/</span><span class="n">partitions_singleapp</span><span class="o">.</span><span class="n">bin</span>
+</pre></div>
+</div>
+<p>(change /dev/ttyUSB0 to the USB device as identified when setting up the
+serial connection)</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If your system cannot find esptool.py, try running
+<strong class="command">~/.local/bin/esptool.py</strong> instead.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="calibrating-the-battery-measurement">
+<span id="section-reference-voltage"></span><h2>Calibrating the battery measurement<a class="headerlink" href="#calibrating-the-battery-measurement" title="Permalink to this headline">¶</a></h2>
+<p>The ESP32 measures the battery voltage by comparing it to an internal reference
+voltage. Unfortunately, this reference voltage is not very accurate and differs
+from ESP32 to ESP32, so that the measured battery voltage will also vary from
+push button to push button. Because the voltage of a LiFePo4 battery only drops
+relatively little when the battery is discharged, this can result in very
+inaccurate indication of the battery level by the Status LED
+(see <a class="reference internal" href="user.html#section-status-led"><span class="std std-ref">Status LED</span></a>).</p>
+<p>To improve this, it is recommended to measure this reference voltage with a
+voltmeter and to let the controller know this measured value, so that its
+variation can be taken into account during battery voltage measurement.</p>
+<ol class="arabic simple">
+<li>Switch on the student’s button, or switch on the teacher’s button while
+pressing it to enable its configuration mode.</li>
+<li>Connect to the button using the <a class="reference external" href="https://play.google.com/store/apps/details?id=net.rothkranz.pushbutton">EGPushButton Configurator</a> app.</li>
+<li>In the app, press the <span class="guilabel">Voltage calibration mode</span> button and
+confirm the pop up dialog with “OK”.</li>
+<li>Switch the button off and on again. It will now start in reference voltage
+measurement mode, indicated by the Status LED blinking 2-3 times per second.</li>
+<li>Measure the reference voltage between pin IO27 / D27 and ground of the ESP32
+controller. It should be between 1000mV and 1200mV. If it is very different,
+try again from the beginning. Note down or memorise the measured value.</li>
+<li>Switch the button off and on again. It will start as a student’s button, even
+if it was a teacher’s button before.</li>
+<li>Again, connect to the button using the EGPushButton Configurator app.</li>
+<li>In the app, enter the measured voltage in millivolts into the
+<span class="guilabel">Reference voltage</span> field and press the <a class="reference internal" href="_images/app-save-button.png"><img alt="app-save-button" src="_images/app-save-button.png" style="width: 17.0px; height: 17.0px;" /></a> icon
+next to it to save the value.</li>
+<li>If the button is a teacher’s button, set the button mode accordingly in the
+app.</li>
+<li>Switch the button off and on again and it should be ready to use.</li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="software.html" class="btn btn-neutral float-right" title="Software development manual" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="user.html" class="btn btn-neutral" title="User’s Manual" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Heiko Rothkranz.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.3.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,421 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>User’s Manual &mdash; EGPushButton 0.3.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="EGPushButton 0.3.3 documentation" href="index.html"/>
+        <link rel="next" title="Hardware building instructions" href="hardware.html"/>
+        <link rel="prev" title="Introduction" href="introduction.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> EGPushButton
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">User’s Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-use-the-buttons">How to use the buttons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#status-led">Status LED</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#charging-the-buttons">Charging the buttons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#replacing-the-batteries">Replacing the batteries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuring-the-buttons">Configuring the buttons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pairing-student-and-teacher-buttons">Pairing student and teacher buttons</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#to-change-the-number-of-a-student-s-button">To change the number of a student’s button</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#to-change-the-number-of-a-teacher-s-button">To change the number of a teacher’s button</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hardware.html">Hardware building instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="software.html">Software development manual</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">EGPushButton</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>User’s Manual</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/user.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="user-s-manual">
+<h1>User’s Manual<a class="headerlink" href="#user-s-manual" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<span id="section-user-overview"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<img alt="_images/pushbutton.jpg" src="_images/pushbutton.jpg" />
+</div>
+<div class="section" id="how-to-use-the-buttons">
+<h2>How to use the buttons<a class="headerlink" href="#how-to-use-the-buttons" title="Permalink to this headline">¶</a></h2>
+<p>You should have received a student’s button and a teacher’s button which are
+already paired to each other and ready to use. If you want to use a combination
+of buttons which were not previously used with each other, see
+<a class="reference internal" href="#section-pairing"><span class="std std-ref">Pairing student and teacher buttons</span></a>.</p>
+<ol class="arabic simple">
+<li>Connect the toy to the student’s button.</li>
+<li>Turn both buttons on by setting the main switch to the ‘on’ position (I).</li>
+<li>The status LEDs will blink while the buttons are connecting to each other.
+This often takes 15-30 seconds.</li>
+<li>After the status LEDs on both buttons stop blinking, they are ready to use.</li>
+</ol>
+</div>
+<div class="section" id="status-led">
+<span id="section-status-led"></span><h2>Status LED<a class="headerlink" href="#status-led" title="Permalink to this headline">¶</a></h2>
+<p>The following table provides an overview of the various LED blinking patterns.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="44%" />
+<col width="56%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">LED pattern</th>
+<th class="head">Button status</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Blinking 2-3 times per second</td>
+<td>Reference voltage measurement mode
+(see <a class="reference internal" href="hardware.html#section-reference-voltage"><span class="std std-ref">Calibrating the battery measurement</span></a>)</td>
+</tr>
+<tr class="row-odd"><td>Blinking once per second</td>
+<td>Button is not connected</td>
+</tr>
+<tr class="row-even"><td>Blinking every two seconds</td>
+<td>Battery empty</td>
+</tr>
+<tr class="row-odd"><td>Steady light</td>
+<td>Button connected and ready to use</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="charging-the-buttons">
+<h2>Charging the buttons<a class="headerlink" href="#charging-the-buttons" title="Permalink to this headline">¶</a></h2>
+<p>The push buttons contain a built-in USB charger. You can use any regular phone
+or tablet charger.</p>
+<p>To recharge the buttons, flip the main switch to the charging position (II).
+Plug in a USB charger. There’s a small hole in the bottom of the push button,
+below the charger, through which you can see the charging light:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="81%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Light colour</th>
+<th class="head">Charging status</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Red</td>
+<td>Charging</td>
+</tr>
+<tr class="row-odd"><td>Green</td>
+<td>Fully charged or main switch not in charging position (II)</td>
+</tr>
+</tbody>
+</table>
+<p>When the button is fully charged, unplug the USB charger and set the main
+switch back to ‘off’ (O). If the main switch is left in the charging position
+(II) for a very long time, the batteries will self-discharge and potentially
+damage.</p>
+</div>
+<div class="section" id="replacing-the-batteries">
+<h2>Replacing the batteries<a class="headerlink" href="#replacing-the-batteries" title="Permalink to this headline">¶</a></h2>
+<p>It is normally not necessary to replace the included rechargeable batteries.</p>
+<div class="admonition danger">
+<p class="first admonition-title">Danger</p>
+<p class="last">Only use rechargeable Lithium Iron Phophate (LiFePo4) batteries. Do not
+attempt to use regular batteries. When exchanging the batteries, be sure to
+insert them as marked in the battery compartment. Inserting batteries of the
+wrong type or in the wrong orientation may result in damage to the buttons
+and/or a fire hazard! If unsure, do not hesitate to ask for help!</p>
+</div>
+<p>The push buttons use LiFePo4 batteries with a nominal voltage of 3.2V. The
+correct orientation of the batteries is <strong>hand-labeled</strong> inside the battery
+compartment and may deviate from the orientation marked in the plastic or the
+orientation suggested by the battery holder. Both batteries must have the same
+orientation. They are to be connected in parallel, not in series.</p>
+</div>
+<div class="section" id="configuring-the-buttons">
+<span id="section-configuration"></span><h2>Configuring the buttons<a class="headerlink" href="#configuring-the-buttons" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="https://play.google.com/store/apps/details?id=net.rothkranz.pushbutton">EGPushButton Configurator</a> app can connect to any student’s button or
+teacher’s button (in configuration mode) to inspect and change its settings.</p>
+<p>To be able to connect to a student’s button, it must not be connected to any
+other device already. Specifically, switch off its associated teacher’s button
+while configuring the student’s button.</p>
+<p>To put a teacher’s button into configuration mode, hold down its push button
+while switching the button on.</p>
+<p>A student’s button provides the following options:</p>
+<ul class="simple">
+<li><span class="guilabel">Button number</span> between 1 and 99 (used for pairing, see <a class="reference internal" href="#section-pairing"><span class="std std-ref">Pairing student and teacher buttons</span></a>)</li>
+<li><span class="guilabel">Button mode</span> (‘Student’, can be set to ‘Teacher’)</li>
+<li><span class="guilabel">Enabled</span> status (0 = disabled, 1 = enabled)</li>
+<li><span class="guilabel">Min. pushes</span> and <span class="guilabel">Max. pushes</span> (1-255) between which the
+button is randomly disabled</li>
+<li>Toy <span class="guilabel">Operation time</span> per push in seconds (1-255)</li>
+<li><span class="guilabel">Reference voltage</span> in millivolts (to be set during manufacturing, see
+<a class="reference internal" href="hardware.html#section-reference-voltage"><span class="std std-ref">Calibrating the battery measurement</span></a>)</li>
+</ul>
+<p>It also displays the following information:</p>
+<ul class="simple">
+<li>Current number of button pushes and current random limit after which the
+button will be disabled</li>
+<li>Current <span class="guilabel">Toy status</span> (off or on)</li>
+<li><span class="guilabel">Firmware version</span></li>
+</ul>
+<p>The teacher’s button only offers the following options:</p>
+<ul class="simple">
+<li><span class="guilabel">Button number</span> between 1 and 99</li>
+<li><span class="guilabel">Button mode</span> (‘Teacher’, can be set to ‘Student’)</li>
+<li><span class="guilabel">Reference voltage</span></li>
+<li><span class="guilabel">Firmware version</span> for information</li>
+</ul>
+<p>Numeric settings can be saved to the button by pressing the <a class="reference internal" href="_images/app-save-button.png"><img alt="app-save-button" src="_images/app-save-button.png" style="width: 17.0px; height: 17.0px;" /></a>
+icon next to it. To refresh a value or status, press the <a class="reference internal" href="_images/app-refresh-button.png"><img alt="app-refresh-button" src="_images/app-refresh-button.png" style="width: 15.0px; height: 14.0px;" /></a>
+icon next to it.</p>
+<p>For the button number or mode settings to take effect, you need to restart the
+button.</p>
+</div>
+<div class="section" id="pairing-student-and-teacher-buttons">
+<span id="section-pairing"></span><h2>Pairing student and teacher buttons<a class="headerlink" href="#pairing-student-and-teacher-buttons" title="Permalink to this headline">¶</a></h2>
+<p>Each button (student and teacher) has a button number. A teacher button will
+try to connect to a student button with the same number as its own. To pair a
+teacher button to a different student button, you will have to change the
+button number of one or both of them. It does not matter which number between
+1 and 99 you choose, but it should be different from other button pairs you may
+be using.</p>
+<p>To change a button’s number you need to use the <a class="reference external" href="https://play.google.com/store/apps/details?id=net.rothkranz.pushbutton">EGPushButton Configurator</a>
+app.</p>
+<div class="section" id="to-change-the-number-of-a-student-s-button">
+<h3>To change the number of a student’s button<a class="headerlink" href="#to-change-the-number-of-a-student-s-button" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Make sure any teacher’s buttons in the vicinity are off, otherwise they
+interfere with the app connection.</li>
+<li>Turn the student’s button on.</li>
+<li>Find the student’s button in the app and connect to it.</li>
+<li>Enter the new button number into the app and press the <a class="reference internal" href="_images/app-save-button.png"><img alt="app-save-button" src="_images/app-save-button.png" style="width: 17.0px; height: 17.0px;" /></a> icon next to it.</li>
+<li>Turn the student’s button off and on again for the change to take effect.</li>
+</ol>
+</div>
+<div class="section" id="to-change-the-number-of-a-teacher-s-button">
+<h3>To change the number of a teacher’s button<a class="headerlink" href="#to-change-the-number-of-a-teacher-s-button" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Hold down the teacher’s push button while turning it on.</li>
+<li>Find the teacher’s button in the app and connect to it.</li>
+<li>Enter the new button number into the app and press the <a class="reference internal" href="_images/app-save-button.png"><img alt="app-save-button" src="_images/app-save-button.png" style="width: 17.0px; height: 17.0px;" /></a> icon next to it.</li>
+<li>Turn the teacher’s button off and on again for the change to take effect.</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="hardware.html" class="btn btn-neutral float-right" title="Hardware building instructions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="introduction.html" class="btn btn-neutral" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Heiko Rothkranz.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.3.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
