@@ -1,0 +1,233 @@
+.. Copyright 2018 Heiko Rothkranz
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+   http://www.apache.org/licenses/LICENSE-2.0
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+Hardware building instructions
+##############################
+
+This chapter explains how the push button hardware works and how to build new
+push buttons.
+
+Required parts
+**************
+
+The following parts are needed to build the buttons. The student's button is
+made the same way as the teacher's button, but also has a relay and an audio
+socket in addition, to allow to connect and control a toy.
+
+Teacher's button
+================
+
+* 1 housing
+* 1 push button which is normally open and closes electrical contact when
+  pushed
+* Battery case(s) for the batteries (see :ref:`section-batteries-cases-chargers`
+  below)
+* At least one LiFePo4 battery (see :ref:`section-batteries-cases-chargers`)
+* 1 switch with three positions
+* Micro USB charger board for LiFePo4 batteries (e.g. 'TP5000', see
+  :ref:`section-batteries-cases-chargers` below)
+* 1 ESP32 development board: Any development board with USB port should work
+* 1 LED (see :ref:`section-led-resistor` below)
+* 1 resistor (value depending on your LED, see :ref:`section-led-resistor`
+  below)
+* Insulated wire, preferably in different colours
+* Some small nuts and bolts and/or hot glue to fixate the parts inside the
+  housing (note that the charger might become hot when charging and melt the
+  hot glue)
+
+Student's button
+================
+
+* All the parts as for the teacher's button
+* 1 3V/3.3V electromechanical relay (e.g. 'Songle 3V')
+* 3.5mm mono audio/headphone socket
+
+You may also be able to find housing, push button and battery case in one item,
+e.g. in those battery powered LED night lights. Have a look at the image in the
+user manual's :ref:`section-user-overview` section to see an example.
+
+Schematics
+**********
+
+.. image:: _static/schematics.png
+
+The schematics are identical for the student's and the teacher's version,
+except for the addition of a relay and an audio socket to the student's button.
+The schematics can also be found as KiCad project and PDF file in
+the :file:`eg-pushbutton-sources/hardware` directory.
+
+.. _section-batteries-cases-chargers:
+
+Selecting batteries, cases and chargers
+***************************************
+
+The ESP32 and the relay need an operating voltage between 2.2V and 3.6V. This
+is not achievable using regular alkaline or rechargeable batteries without
+additional circuitry. Therefore, LiFePo4 rechargeable batteries are
+recommended, because they can power the ESP32 and the relay directly.
+
+The original design uses two AA size 600mAh LiFePo4 batteries in parallel, for
+a combined capacity of 1200mAh. If your housing size permits, you could also
+use a single battery of similar capacity, or even a larger one for longer
+operating time.
+
+If you use more than one battery, it is important to connect them in parallel,
+not in series! Most battery holders for two or more batteries are designed for
+series connection though. You may have to modify the battery holder for a
+parallel setup.
+
+Generally, the slower you charge a LiFePo4 battery, the more cycles it will
+last. Usually, the battery manufacturer should state the maximum charging
+current, but this does not always seem to be the case. In our experience,
+charging the 1200mAh battery set with a 1000mA charging current resulted in a
+full charge after about 2.5h.
+
+.. _section-led-resistor:
+
+Matching LED and resistor
+*************************
+
+.. tip::
+   If you don't have the voltage drop and design current for your LED, using a
+   200 Ohms resistor should be a safe bet for most LED and should not endanger
+   your ES32. Don't blame me if it breaks your LED though.  
+
+LEDs only have voltage drop, but no internal resistance. Therefore, without a
+resistor, there would be too much current which will potentially damage the LED
+and the ESP32.
+
+The ESP32 can provide a maximum of 40mA current on any output pin, so you
+should choose a LED which needs less than that. Most standard LEDs need about
+20mA for full brightness.
+
+If you know the design current and voltage drop of your LED, you can calculate
+the required resistor value in Ohms using:
+
+R = (3.3V-U_drop)/I_max
+
+Resistors don't come with arbitrary values, so you should choose the next
+larger resistor you can find. That will dim the LED slightly, but you'll be on
+the safe side in terms of current. 
+
+Flashing the software
+*********************
+
+Both the teacher's button and the student's button run the same software. After
+flashing a button for the first time, it will start up as a student's button.
+The button mode can be changed to be a teacher's button using the
+`EGPushButton Configurator`_ app (see :ref:`section-configuration`).
+
+#. Before flashing, turn off the pushbutton by switching the main switch to 0
+   (off)
+#. Get the latest pushbutton software from EG. It's in a folder named
+   :file:`eg-pushbutton-release-x.x.x` (x.x.x being the version number). It
+   contains three files:
+
+   * :file:`bootloader.bin`
+   * :file:`eg_pushbutton.bin`
+   * :file:`partitions_singleapp.bin`
+
+#. Connect the ESP32 board to your computer as described in
+   http://esp-idf.readthedocs.io/en/latest/get-started/establish-serial-connection.html
+
+On Windows
+==========
+
+#. Download and unpack the `Flash Download Tools`_ from the Espressif website
+#. Start the .exe file within
+#. Click :guilabel:`ESP32 DownloadTool`
+#. In the :guilabel:`SPIDownload` tab, make the following settings as shown in
+   the screenshot below:
+   
+   * Add the three .bin files from the software release as follows:
+   
+     * :file:`bootloader.bin` @ 0x1000
+     * :file:`eg_pushbutton.bin` @ 0x10000
+     * :file:`partitions_singleapp.bin` @ 0x8000
+     
+   * Set COM port to the USB device as determined in the Windows Device Manager
+     when setting up the connection
+   * Set BAUD rate to "115200"
+   * Ensure that :guilabel:`SPI MODE` is set to "DIO"
+   * Ensure that :guilabel:`SPI SPEED` is set to "40M"
+   * Ensure that :guilabel:`FLASH SIZE` is set to "32MBit"
+   * Ensure that :guilabel:`SpiAutoSet` is unchecked
+   
+   .. image:: _static/espdownloadtool.png
+   
+#. Click :guilabel:`START`
+#. Wait for the green status box to read "FINISH"
+#. Reset the ESP32 by pushing the "EN" button on the development board or by
+   unplugging the USB cable
+
+On Linux
+========
+
+#. Install `esptool.py`_
+#. From your project directory, run::
+
+     esptool.py --chip esp32 --port /dev/ttyUSB0 --baud 115200 \
+     --before default_reset --after hard_reset \
+     write_flash -z --flash_mode dio --flash_freq 40m --flash_size detect \
+     0x1000 build/bootloader/bootloader.bin \
+     0x10000 build/eg_pushbutton.bin \
+     0x8000 build/partitions_singleapp.bin
+     
+   (change /dev/ttyUSB0 to the USB device as identified when setting up the
+   serial connection)
+
+   .. note::
+      If your system cannot find esptool.py, try running
+      :command:`~/.local/bin/esptool.py` instead.
+   
+.. _section-reference-voltage:
+
+Calibrating the battery measurement
+***********************************
+
+The ESP32 measures the battery voltage by comparing it to an internal reference
+voltage. Unfortunately, this reference voltage is not very accurate and differs
+from ESP32 to ESP32, so that the measured battery voltage will also vary from
+push button to push button. Because the voltage of a LiFePo4 battery only drops
+relatively little when the battery is discharged, this can result in very
+inaccurate indication of the battery level by the Status LED
+(see :ref:`section-status-led`).
+
+To improve this, it is recommended to measure this reference voltage with a
+voltmeter and to let the controller know this measured value, so that its
+variation can be taken into account during battery voltage measurement.
+
+#. Switch on the student's button, or switch on the teacher's button while
+   pressing it to enable its configuration mode.
+#. Connect to the button using the `EGPushButton Configurator`_ app.
+#. In the app, press the :guilabel:`Voltage calibration mode` button and
+   confirm the pop up dialog with "OK". 
+#. Switch the button off and on again. It will now start in reference voltage
+   measurement mode, indicated by the Status LED blinking 2-3 times per second.
+#. Measure the reference voltage between pin IO27 / D27 and ground of the ESP32
+   controller. It should be between 1000mV and 1200mV. If it is very different,
+   try again from the beginning. Note down or memorise the measured value.
+#. Switch the button off and on again. It will start as a student's button, even
+   if it was a teacher's button before.
+#. Again, connect to the button using the EGPushButton Configurator app.
+#. In the app, enter the measured voltage in millivolts into the
+   :guilabel:`Reference voltage` field and press the |app-save-button| icon
+   next to it to save the value.
+#. If the button is a teacher's button, set the button mode accordingly in the
+   app.
+#. Switch the button off and on again and it should be ready to use.
+
+.. |app-save-button| image:: _static/app-save-button.png
+   :scale: 50%
+
+.. _EGPushButton Configurator: https://play.google.com/store/apps/details?id=net.rothkranz.pushbutton
+.. _Flash Download Tools: https://www.espressif.com/en/support/download/other-tools
+.. _esptool.py: https://github.com/espressif/esptool
